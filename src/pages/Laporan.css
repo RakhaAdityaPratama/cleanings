@@ -1,0 +1,132 @@
+.laporan-container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.laporan-item.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.laporan-list {
+  width: 100%;
+  max-width: 500px;
+}
+
+.week-group {
+  margin-bottom: 2rem;
+}
+
+.laporan-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.laporan-item:hover {
+  transform: translateY(-5px);
+}
+
+.laporan-item h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.laporan-item p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+/* New Styles for Group Delete */
+.week-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.week-group-header h2 {
+  margin: 0;
+  border: none; /* Remove duplicate border from h2 */
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.group-delete-actions button {
+  margin-left: 0.5rem;
+}
+
+.delete-button.confirm {
+  background-color: #28a745; /* Green */
+}
+
+.delete-button.confirm:hover {
+  background-color: #218838;
+}
+
+.delete-button.cancel {
+  background-color: #6c757d; /* Gray */
+}
+
+.delete-button.cancel:hover {
+  background-color: #5a6268;
+}
+
+.laporan-item.in-selection {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.delete-checkbox {
+  margin-right: 1rem;
+  /* Make checkbox bigger and more visible */
+  width: 1.2em;
+  height: 1.2em;
+  cursor: pointer;
+}
+
+.laporan-item-content {
+  flex-grow: 1;
+}
+
+.laporan-item-content .delete-button {
+    margin-top: 1rem;
+}
+
+.week-group-header .delete-button {
+    margin-top: 0;
+}
