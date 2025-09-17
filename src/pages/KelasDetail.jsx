@@ -33,6 +33,12 @@ const KelasDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation: Check if 'keadaan' is selected
+    if (!keadaan) {
+      alert('Silakan pilih keadaan kelas (Bersih atau Kotor).');
+      return; // Stop the submission
+    }
+
     const newLaporan = {
       kelas: `${tingkat} ${kelas.replace('-', ' ')}`,
       keadaan,
@@ -93,6 +99,7 @@ Masalah Lainnya: ${masalah}
                 value="bersih"
                 checked={keadaan === 'bersih'}
                 onChange={(e) => setKeadaan(e.target.value)}
+                required // Makes this field mandatory
               />
               Bersih
             </label>
