@@ -7,9 +7,9 @@ const Kelas = () => {
     VII: ['A', 'B', 'C', 'D'],
     VIII: ['A', 'B', 'C', 'D'],
     IX: ['A', 'B', 'C', 'D'],
-    X: ['IPA 1', 'IPS 1', 'A SMK', 'B SMK'],
-    XI: ['IPA 1', 'IPS 1', 'A SMK', 'B SMK'],
-    XII: ['IPA 1', 'IPS 1', 'A SMK', 'B SMK'],
+    X: ['IPA-1', 'IPS-1', 'A-SMK', 'B-SMK'],
+    XI: ['IPA-1', 'IPS-1', 'A-SMK', 'B-SMK'],
+    XII: ['IPA-1', 'IPS-1', 'A-SMK', 'B-SMK'],
   };
 
   return (

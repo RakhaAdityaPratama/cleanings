@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './KelasDetail.css';
 import { supabase } from '../supabaseClient';
+import Modal from '../components/Modal'; // Import Modal
 
 const KelasDetail = () => {
   const { classId } = useParams();
   const navigate = useNavigate();
-  const [tingkat, kelas] = classId.split('-');
+  const firstHyphenIndex = classId.indexOf('-');
+  const tingkat = classId.substring(0, firstHyphenIndex);
+  const kelas = classId.substring(firstHyphenIndex + 1);
 
   // --- Placeholder for teacher's phone numbers ---
   // Please replace these with the actual phone numbers
@@ -20,13 +23,23 @@ const KelasDetail = () => {
   const [keadaan, setKeadaan] = useState('');
   const [alat, setAlat] = useState([]); // Changed to array
   const [masalah, setMasalah] = useState('');
+  const [showModal, setShowModal] = useState(false); // Add modal state
 
   const handleAlatChange = (e) => {
     const { value, checked } = e.target;
-    if (checked) {
-      setAlat([...alat, value]);
+
+    if (value === 'tidak ada') {
+      if (checked) {
+        setAlat(['tidak ada']);
+      } else {
+        setAlat([]);
+      }
     } else {
-      setAlat(alat.filter((item) => item !== value));
+      if (checked) {
+        setAlat([...alat.filter(item => item !== 'tidak ada'), value]);
+      } else {
+        setAlat(alat.filter((item) => item !== value));
+      }
     }
   };
 
@@ -61,7 +74,7 @@ const KelasDetail = () => {
       if (!phoneNumber) {
         alert('Nomor WhatsApp wali kelas tidak ditemukan.');
         // Still save to history even if number is not found
-        navigate('/laporan');
+        setShowModal(true); // Show modal even if number is not found
         return;
       }
 
@@ -77,13 +90,21 @@ Masalah Lainnya: ${masalah}
 
       window.open(whatsappUrl, '_blank');
 
-      // 3. Navigate to laporan page
-      navigate('/laporan');
+      // 3. Show success modal
+      setShowModal(true);
+      setKeadaan('');
+      setAlat([]);
+      setMasalah('');
 
     } catch (error) {
       console.error('There was a problem with your insert operation:', error);
       alert('Gagal mengirim laporan. Silakan coba lagi.');
     }
+  };
+
+  // Function to close modal
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -118,20 +139,24 @@ Masalah Lainnya: ${masalah}
           <label>Alat Kebersihan</label>
           <div className="checkbox-group">
             <label>
-              <input type="checkbox" value="sapu" onChange={handleAlatChange} />
+              <input type="checkbox" value="sapu" checked={alat.includes('sapu')} onChange={handleAlatChange} />
               Sapu
             </label>
             <label>
-              <input type="checkbox" value="pel" onChange={handleAlatChange} />
+              <input type="checkbox" value="pel" checked={alat.includes('pel')} onChange={handleAlatChange} />
               Pel
             </label>
             <label>
-              <input type="checkbox" value="pengki" onChange={handleAlatChange} />
+              <input type="checkbox" value="pengki" checked={alat.includes('pengki')} onChange={handleAlatChange} />
               Pengki
             </label>
             <label>
-              <input type="checkbox" value="serokan air" onChange={handleAlatChange} />
+              <input type="checkbox" value="serokan air" checked={alat.includes('serokan air')} onChange={handleAlatChange} />
               Serokan Air
+            </label>
+            <label>
+              <input type="checkbox" value="tidak ada" checked={alat.includes('tidak ada')} onChange={handleAlatChange} />
+              Tidak Ada
             </label>
           </div>
         </div>
@@ -146,9 +171,14 @@ Masalah Lainnya: ${masalah}
         </div>
         <button type="submit">Kirim Laporan via WhatsApp & Simpan</button>
       </form>
+      {showModal && (
+        <Modal
+          message="Laporan berhasil dikirim!"
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };
 
 export default KelasDetail;
-
