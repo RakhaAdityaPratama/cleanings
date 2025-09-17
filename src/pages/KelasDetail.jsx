@@ -52,6 +52,12 @@ const KelasDetail = () => {
       return; // Stop the submission
     }
 
+    // Validation: Check if 'alat' is selected
+    if (alat.length === 0) {
+      alert('Silakan pilih alat kebersihan yang tersedia.');
+      return; // Stop the submission
+    }
+
     const newLaporan = {
       kelas: `${tingkat} ${kelas.replace('-', ' ')}`,
       keadaan,
