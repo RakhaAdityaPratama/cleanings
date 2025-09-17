@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Laporan.css';
+import { supabase } from '../supabaseClient';
 
 // Helper function to get a string representation of the week's start date in DD-MM-YYYY format
 const getWeekId = (date) => {
@@ -29,10 +30,16 @@ function Laporan() {
   useEffect(() => {
     const fetchLaporan = async () => {
       try {
-        const response = await fetch('https://laporan-api.up.railway.app/laporan');
-        const data = await response.json();
-        // Sort data by timestamp descending
-        data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        const { data, error } = await supabase
+          .from('laporan')
+          .select('*')
+          .order('timestamp', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching data:', error);
+          return;
+        }
+        
         setLaporan(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -94,23 +101,18 @@ function Laporan() {
 
     if (window.confirm('Yakin mau hapus?')) {
       try {
-        const deletePromises = Array.from(selectedItems).map(id =>
-          fetch(`https://laporan-api.up.railway.app/laporan/${id}`, {
-            method: 'DELETE',
-          })
-        );
+        const { error } = await supabase
+          .from('laporan')
+          .delete()
+          .in('id', Array.from(selectedItems));
 
-        const responses = await Promise.all(deletePromises);
-
-        const allOk = responses.every(res => res.ok);
-
-        if (allOk) {
+        if (error) {
+          console.error('Error deleting data:', error);
+          alert('Gagal menghapus data. Silakan coba lagi.');
+        } else {
           const updatedLaporan = laporan.filter(item => !selectedItems.has(item.id));
           setLaporan(updatedLaporan);
           setSelectionState({ activeGroup: null, selectedItems: new Set() });
-        } else {
-          console.error('Failed to delete some items:', responses);
-          alert('Gagal menghapus beberapa data. Silakan coba lagi.');
         }
       } catch (error) {
         console.error('Error deleting data:', error);

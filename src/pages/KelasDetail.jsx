@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './KelasDetail.css';
+import { supabase } from '../supabaseClient';
 
 const KelasDetail = () => {
   const { classId } = useParams();
@@ -37,20 +38,14 @@ const KelasDetail = () => {
       keadaan,
       alat: alat.join(', '),
       masalah,
-      timestamp: new Date().toISOString(),
+      // timestamp is handled by the database
     };
 
     try {
-      const response = await fetch('https://laporan-api.up.railway.app/laporan', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newLaporan),
-      });
+      const { error } = await supabase.from('laporan').insert([newLaporan]);
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      if (error) {
+        throw error;
       }
 
       // 2. Open WhatsApp
@@ -80,7 +75,7 @@ Masalah Lainnya: ${masalah}
       navigate('/laporan');
 
     } catch (error) {
-      console.error('There was a problem with your fetch operation:', error);
+      console.error('There was a problem with your insert operation:', error);
       alert('Gagal mengirim laporan. Silakan coba lagi.');
     }
   };
@@ -149,3 +144,4 @@ Masalah Lainnya: ${masalah}
 };
 
 export default KelasDetail;
+
