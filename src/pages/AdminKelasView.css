@@ -1,0 +1,86 @@
+.kelas-container {
+  padding: 2rem;
+}
+
+.kelas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.kelas-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.kelas-card h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.kelas-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.kelas-card li {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.kelas-card li:hover {
+  background-color: #f0f0f0;
+}
+
+.kelas-card li a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 0.75rem;
+}
+
+.add-class-button, .delete-class-button, .confirm-delete-button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-class-button {
+  background-color: #007bff;
+}
+
+.action-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.delete-class-button {
+  background-color: #dc3545;
+}
+
+
+.confirm-delete-button {
+  background-color: #28a745;
+}
+
+.kelas-card li.deleting label {
+  display: block;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.kelas-card li.selected {
+  background-color: #ffeeba;
+}
+
+

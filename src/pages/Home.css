@@ -1,0 +1,87 @@
+.home .hero {
+  position: relative;
+  background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.home .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.home .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.home .hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.home .hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.home .cta-button {
+  background-color: #87CEEB;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.home .cta-button:hover {
+  background-color: #00BFFF;
+}
+
+.home .features {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.home .features h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.home .feature-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.home .card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: left;
+  border: 1px solid #e0e0e0;
+}
+
+.home .card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.home .card p {
+  color: #555;
+}

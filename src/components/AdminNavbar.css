@@ -1,0 +1,76 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  color: #2c3e50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand a {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin-left: 1.5rem;
+}
+
+.nav-link {
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #87CEEB;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #87CEEB;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.logout-button {
+  background-color: #e74c3c; /* Warna merah yang menunjukkan aksi 'keluar' */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6rem 1.2rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #c0392b; /* Warna merah yang lebih gelap saat hover */
+  transform: translateY(-1px);
+}
+
+.logout-button:active {
+  transform: translateY(0);
+}
